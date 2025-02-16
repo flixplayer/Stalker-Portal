@@ -29,7 +29,7 @@ https://www.apachefriends.org/download.html
 ```
 ### 🅱️ Then Download This Zip File
 
-- [Stalker-Portal.Zip](https://github.com/flixplayer/Stalker-Portal-Script/blob/main/Stalker-Portal.zip) </br>
+- [Stalker-Portal.Zip](https://github.com/flixplayer/Stalker-Portal) </br>
 
 1. Locate & Extract all Files in LocalHost `Htdocs` Root Folder. </br>
 
@@ -81,7 +81,7 @@ http://localhost:8080/Stalker-Portal/
 	<h3>🗼 VLC  Media Player  Setup:</h3>
 <img src="https://i.ibb.co/1nRbLnG/image.png" alt="home" width="700" height="350">
 
-1. Copy the full playlist URL and paste it into VLC: [http://localhost/Stalker-Portal/yourplaylistname.m3u](http://localhost/Stalker-Portal/yourplaylistname.m3u). Simply press Ctrl + C to copy, and in VLC, press Ctrl + V to paste.
+1. Copy the full playlist URL and paste it into VLC: [http://localhost/yourfolder/yourplaylistname.m3u](http://localhost/yourfolder/yourplaylistname.m3u). Simply press Ctrl + C to copy, and in VLC, press Ctrl + V to paste.
 2. <img src="https://i.ibb.co/kghv1Cc/image.png" alt="home" width="700" height="350">
 3. Wait, it will load your playlist data.
 4. After it loads, go to the 'View' menu and select the 'Docket Playlist' option.
@@ -101,7 +101,7 @@ http://localhost:8080/Stalker-Portal/
 
 ```
 
-http://localhost:8080/Stalker-Portal/yourplaylistname.m3u
+http://localhost:8080/yourfolder/yourplaylistname.m3u
 
 ```
 
@@ -113,6 +113,7 @@ http://localhost:8080/Stalker-Portal/yourplaylistname.m3u
 - I am in no way responsible if you misuse the code and cause revenue loss to the concerned parties and owners of the portal
 - Don't Sell this Script, This is 💯% Free
 <hr>
+CONTACT AT DISCORD : @flixtvprovider
 
 <h4 align='center'>© 2021-25 Dhaliwal Sunny</h4>
 
