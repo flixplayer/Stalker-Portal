@@ -3,7 +3,7 @@ session_start();
 
 // Define the correct username and password
 $correct_username = 'admin';
-$correct_password = 'flix@123';
+$correct_password = 'password';
 
 // Set the session timeout duration (5 minutes)
 $timeout_duration = 300;
