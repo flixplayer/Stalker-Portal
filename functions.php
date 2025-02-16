@@ -79,7 +79,7 @@ function getPlaylist($m3u) {
         $playlist .= $data . "\n\n";
     }
     file_put_contents("$file.m3u", $playlist);
-    echo "<span style='color: green; font-weight: bold; font-size: 16px;'>Successfully Saved Playlist $file.m3u</span>";
+    echo "<center><span style='color: green; font-weight: bold; font-size: 16px;'>Successfully Saved Playlist. URL : https://yourdomian.com/yourscriptfolder/$file.m3u</span></center>";
 }
 
 function getFlixTvChannelsInfo($m3u = false) {
