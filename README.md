@@ -29,7 +29,7 @@ https://www.apachefriends.org/download.html
 ```
 ### 🅱️ Then Download This Zip File
 
-- [Stalker-Portal.Zip](https://github.com/Jitendraunatti/Stalker-Portal/archive/refs/heads/main.zip) </br>
+- [Stalker-Portal.Zip](https://github.com/flixplayer/Stalker-Portal-Script/blob/main/Stalker-Portal.zip) </br>
 
 1. Locate & Extract all Files in LocalHost `Htdocs` Root Folder. </br>
 
