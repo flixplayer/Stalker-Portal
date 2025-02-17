@@ -37,11 +37,11 @@ function getProfile($token = "") {
 
 function getTvdata($id) {
     $uri = "stalker_portal/server/load.php?type=itv&action=create_link&cmd=ffrt%20http://localhost/ch/$id";
-    $link = getFlixTvData($uri);
+    $link = getWorldTvData($uri);
     return isset($link['js']['cmd']) ? $link['js']['cmd'] : "";
 }
 
-function getFlixTvData($uri, $mod=true) {
+function getWorldTvData($uri, $mod=true) {
     if(empty($uri)) return "";
     global $domain, $mac;
     $url = $mod ? "https://$domain/$uri" : $uri;
@@ -59,21 +59,21 @@ function getFlixTvData($uri, $mod=true) {
     return $data;
 }
 
-function getFlixTvGenreList() {
+function getWorldTvGenreList() {
     $genreUrl = "stalker_portal/server/load.php?type=itv&action=get_genres";
-    $data = getFlixTvData($genreUrl);
+    $data = getWorldTvData($genreUrl);
     return $data["js"];
 }
 
-function getFlixTvChannelList() {
+function getWorldTvChannelList() {
     $channelListUrl = "stalker_portal/server/load.php?type=itv&action=get_all_channels";
-    $data = getFlixTvData($channelListUrl);
+    $data = getWorldTvData($channelListUrl);
     return $data["js"]["data"];
 }
 
 function getPlaylist($m3u) {
     global $file;
-    $datas = getFlixTvChannelsInfo($m3u);
+    $datas = getWorldTvChannelsInfo($m3u);
     $playlist = "#EXTM3U\n\n\n";
     foreach($datas as $data) {
         $playlist .= $data . "\n\n";
@@ -82,10 +82,10 @@ function getPlaylist($m3u) {
     echo "<center><span style='color: green; font-weight: bold; font-size: 16px;'>Successfully Saved Playlist. URL : https://yourdomian.com/yourscriptfolder/$file.m3u</span></center>";
 }
 
-function getFlixTvChannelsInfo($m3u = false) {
+function getWorldTvChannelsInfo($m3u = false) {
     global $domain, $logoUrl;
-    $genreList = getFlixTvGenreList();
-    $channelList = getFlixTvChannelList();
+    $genreList = getWorldTvGenreList();
+    $channelList = getWorldTvChannelList();
     $channelsInfo = array();
     foreach($channelList as $channel) {
         $logo = !empty($channel["logo"]) ? "https://$domain/stalker_portal/misc/logos/320/" . $channel["logo"] : $logoUrl; 
@@ -121,7 +121,7 @@ function getFlixTvChannelsInfo($m3u = false) {
 
 function getEPGDetails() {
     $url = "stalker_portal/server/load.php?type=itv&action=get_epg_info";
-    $epg = getFlixTvData($url);
+    $epg = getWorldTvData($url);
     $epg = $epg['js']['data'];
     if($epg) $epg["dateTime"] = new DateTime();
     return json_encode($epg);
