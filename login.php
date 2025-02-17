@@ -1,11 +1,40 @@
 <?php
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['username'])) {
-    // Redirect to the login page if not logged in
+// Define the correct username and password
+$correct_username = 'admin';
+$correct_password = 'password';
+
+// Set the session timeout duration (5 minutes)
+$timeout_duration = 300;
+
+// Check if the session is set and if it has timed out
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    // Last request was more than 5 minutes ago
+    session_unset();     // Unset $_SESSION variable for the run-time
+    session_destroy();   // Destroy session data in storage
     header('Location: login.php');
     exit;
+}
+
+// Update last activity timestamp
+$_SESSION['LAST_ACTIVITY'] = time();
+
+// Check if the form was submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Validate the credentials
+    if ($username === $correct_username && $password === $correct_password) {
+        // Store the username in the session
+        $_SESSION['username'] = $username;
+        // Redirect to the protected page
+        header('Location: index.php');
+        exit;
+    } else {
+        $error_message = 'Invalid username or password';
+    }
 }
 ?>
 
@@ -14,64 +43,35 @@ if (!isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stalker Portal Login</title>
+    <title>Login</title>
     <style>
-        @keyframes neon {
-            0% {
-                text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 15px #39ff14, 0 0 20px #39ff14, 0 0 25px #39ff14, 0 0 30px #39ff14, 0 0 35px #39ff14;
-            }
-            25% {
-                text-shadow: 0 0 5px #ff014f, 0 0 10px #ff014f, 0 0 15px #ff014f, 0 0 20px #ff014f, 0 0 25px #ff014f, 0 0 30px #ff014f, 0 0 35px #ff014f;
-            }
-            50% {
-                text-shadow: 0 0 5px #14fffd, 0 0 10px #14fffd, 0 0 15px #14fffd, 0 0 20px #14fffd, 0 0 25px #14fffd, 0 0 30px #14fffd, 0 0 35px #14fffd;
-            }
-            75% {
-                text-shadow: 0 0 5px #fdd614, 0 0 10px #fdd614, 0 0 15px #fdd614, 0 0 20px #fdd614, 0 0 25px #fdd614, 0 0 30px #fdd614, 0 0 35px #fdd614;
-            }
-            100% {
-                text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 15px #39ff14, 0 0 20px #39ff14, 0 0 25px #39ff14, 0 0 30px #39ff14, 0 0 35px #39ff14;
-            }
-        }
         body {
             background-color: #e0f7fa;
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        h1 {
-            animation: neon 3s infinite;
-        }
-        .notification {
-            color: green;
-            font-weight: bold;
         }
         .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-        }
-        .form-container, .iframe-container {
-            flex: 1;
-            min-width: 300px;
-            max-width: 600px;
-            margin: 10px;
+            text-align: left;
         }
         form {
+            max-width: 300px;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
-            background-color: #f9f9f9;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff57;
+            box-shadow: 0 0 10px rgb(0 0 0 / 69%);
+            margin-top: 20px;
         }
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
+           
         }
-        input[type="text"], select {
+        input[type="text"], input[type="password"] {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -87,107 +87,38 @@ if (!isset($_SESSION['username'])) {
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
         }
         input[type="submit"]:hover {
             background-color: #45a049;
         }
-        .button-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .button-container button {
-            padding: 10px 20px;
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .button-container button:hover {
-            background-color: #45a049;
-        }
-        iframe {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-        }
-        .iframe-wrapper {
+        .error {
+            color: red;
+            font-weight: bold;
             margin-bottom: 20px;
         }
+        .logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
     </style>
-    <script>
-        function generateM3UPlaylist(event) {
-            event.preventDefault();
-            const iframe = document.getElementById('m3uIframe');
-            iframe.src = "process.php?m3u=1";
-        }
-
-        function viewProfile() {
-            const iframe = document.getElementById('resultIframe');
-            iframe.src = "process.php?profile=true";
-        }
-    </script>
 </head>
 <body>
     <div class="container">
-        <div class="form-container">
-            <center><h1>Stalker Portal Login</h1></center>
-            <form action="process.php" method="POST">
-                <label for="file">Playlist Name:</label>
-                <input type="text" id="file" placeholder="Enter Name For M3U Playlist" autocomplete="off" name="file" required>
-                
-                <label for="logoUrl">Logo URL:</label>
-                <input type="text" id="logoUrl" placeholder="Enter Own Logo For Channels" autocomplete="off" name="logoUrl">
-                
-                <label for="domain">Portal:</label>
-                <input type="text" id="domain" placeholder="Enter Stalker Portal URL" autocomplete="off" name="domain" required>
-                
-                <label for="mac">MAC:</label>
-                <input type="text" id="mac" placeholder="Enter MAC Address" autocomplete="off" name="mac" required>
-                
-                <label for="d1">Device ID 1:</label>
-                <input type="text" id="d1" placeholder="Enter Device ID 1" autocomplete="off" name="d1" required>
-                
-                <label for="d2">Device ID 2:</label>
-                <input type="text" id="d2" placeholder="Enter Device ID 2" autocomplete="off" name="d2" required>
-                
-                <label for="sn">Serial Number:</label>
-                <input type="text" id="sn" placeholder="Enter Serial Number" autocomplete="off" name="sn" required>
-                
-                <label for="model">Model:</label>
-                <select id="model" placeholder="Select Mag Model" autocomplete="off" name="model" required>
-                    <option value="">Select Mag Model</option>
-                    <option value="MAG250">MAG250</option>
-                    <option value="MAG254">MAG254</option>
-                    <option value="MAG270">MAG270</option>
-                </select>
-                
-                <input type="submit" value="Submit">
-            </form>
-        </div>
-        <div class="iframe-container">
-            <center><h1>Stalker Profile</h1></center>
-
-            <?php
-            if (isset($_GET['success']) && $_GET['success'] == "true") {
-                echo '<p class="notification">Stalker data Fetched Successfully & Stored.</p>';
-            }
-            ?>
-            <div class="button-container">
-                <button onclick="viewProfile()">View Profile</button>
-            </div>
-            <div class="iframe-wrapper">
-                <iframe id="resultIframe" src="" height="200px"></iframe>
-                <iframe id="m3uIframe" src="" height="30px"></iframe>
-                <form onsubmit="generateM3UPlaylist(event)">
-                    <input type="hidden" name="m3u" value="1">
-                    <input type="submit" value="Generate M3U Playlist">
-                </form>
-            </div>
-        </div>
+        <img src="https://vip-tv.online/publ-images/stalker-portal.png" alt="Logo" class="logo">
+        <form action="login.php" method="POST">
+            <?php if (isset($error_message)): ?>
+                <div class="error"><?php echo $error_message; ?></div>
+            <?php endif; ?>
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Username" name="username" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Password" name="password" required>
+            
+            <input type="submit" value="Login">
+        </form>
     </div>
 </body>
 </html>
