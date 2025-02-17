@@ -181,7 +181,7 @@ if (!isset($_SESSION['username'])) {
             </div>
             <div class="iframe-wrapper">
                 <iframe id="resultIframe" src="" height="200px"></iframe>
-                <iframe id="m3uIframe" src="" height="30px"></iframe>
+                <iframe id="m3uIframe" src="" height="60px"></iframe>
                 <form onsubmit="generateM3UPlaylist(event)">
                     <input type="hidden" name="m3u" value="1">
                     <input type="submit" value="Generate M3U Playlist">
