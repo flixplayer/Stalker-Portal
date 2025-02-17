@@ -136,36 +136,36 @@ if (!isset($_SESSION['username'])) {
         <div class="form-container">
             <center><h1>Stalker Portal Login</h1></center>
             <form action="process.php" method="POST">
-                <label for="file">Playlist Name:</label>
-                <input type="text" id="file" placeholder="Enter Name For M3U Playlist" autocomplete="off" name="file" required>
+                <label for="file">PLAYLIST NAME:</label>
+                <input type="text" id="file" placeholder="Enter Name For M3U Playlist Without .m3u" autocomplete="off" name="file" required>
                 
-                <label for="logoUrl">Logo URL:</label>
+                <label for="logoUrl">LOGO URL:</label>
                 <input type="text" id="logoUrl" placeholder="Enter Own Logo For Channels" autocomplete="off" name="logoUrl">
                 
-                <label for="domain">Portal:</label>
-                <input type="text" id="domain" placeholder="Enter Stalker Portal URL" autocomplete="off" name="domain" required>
+                <label for="domain">PORTAL URL:</label>
+                <input type="text" id="domain" placeholder="EX: smart4k.cc" autocomplete="off" name="domain" required>
                 
-                <label for="mac">MAC:</label>
-                <input type="text" id="mac" placeholder="Enter MAC Address" autocomplete="off" name="mac" required>
+                <label for="mac">MAC ADDRESS:</label>
+                <input type="text" id="mac" placeholder="00:1a:79:00:00:00" autocomplete="off" name="mac" required>
                 
-                <label for="d1">Device ID 1:</label>
+                <label for="d1">DEVICE ID 1:</label>
                 <input type="text" id="d1" placeholder="Enter Device ID 1" autocomplete="off" name="d1" required>
                 
-                <label for="d2">Device ID 2:</label>
+                <label for="d2">DEVICE ID 2:</label>
                 <input type="text" id="d2" placeholder="Enter Device ID 2" autocomplete="off" name="d2" required>
                 
-                <label for="sn">Serial Number:</label>
+                <label for="sn">SERIAL NUMBER:</label>
                 <input type="text" id="sn" placeholder="Enter Serial Number" autocomplete="off" name="sn" required>
                 
-                <label for="model">Model:</label>
+                <label for="model">STB TYPE:</label>
                 <select id="model" placeholder="Select Mag Model" autocomplete="off" name="model" required>
-                    <option value="">Select Mag Model</option>
+                    <option value="">SELECT STB TYPE</option>
                     <option value="MAG250">MAG250</option>
                     <option value="MAG254">MAG254</option>
                     <option value="MAG270">MAG270</option>
                 </select>
                 
-                <input type="submit" value="Submit">
+                <input type="submit" value="SUBMIT">
             </form>
         </div>
         <div class="iframe-container">
