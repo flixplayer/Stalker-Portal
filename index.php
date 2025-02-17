@@ -7,7 +7,6 @@ if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +36,9 @@ if (!isset($_SESSION['username'])) {
         body {
             background-color: #e0f7fa;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         h1 {
             animation: neon 3s infinite;
@@ -45,9 +47,19 @@ if (!isset($_SESSION['username'])) {
             color: green;
             font-weight: bold;
         }
-        form {
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .form-container, .iframe-container {
+            flex: 1;
+            min-width: 300px;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 10px;
+        }
+        form {
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
@@ -84,33 +96,25 @@ if (!isset($_SESSION['username'])) {
             text-align: center;
             margin: 20px 0;
         }
-        .button-container a {
-            display: inline-block;
+        .button-container button {
             padding: 10px 20px;
             background-color: #4caf50;
             color: white;
-            text-decoration: none;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
             font-size: 16px;
         }
-        .button-container a:hover {
+        .button-container button:hover {
             background-color: #45a049;
-        }
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 20px;
-        }
-        .form-container, .iframe-container {
-            width: 48%;
         }
         iframe {
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
         }
-        .iframe-container > .iframe-wrapper {
+        .iframe-wrapper {
             margin-bottom: 20px;
         }
     </style>
@@ -138,7 +142,7 @@ if (!isset($_SESSION['username'])) {
                 <label for="logoUrl">Logo URL:</label>
                 <input type="text" id="logoUrl" placeholder="Enter Own Logo For Channels" autocomplete="off" name="logoUrl">
                 
-                <label for="domain">Domain:</label>
+                <label for="domain">Portal:</label>
                 <input type="text" id="domain" placeholder="Enter Stalker Portal URL" autocomplete="off" name="domain" required>
                 
                 <label for="mac">MAC:</label>
@@ -154,7 +158,8 @@ if (!isset($_SESSION['username'])) {
                 <input type="text" id="sn" placeholder="Enter Serial Number" autocomplete="off" name="sn" required>
                 
                 <label for="model">Model:</label>
-                <select id="model" name="model" required>
+                <select id="model" placeholder="Select Mag Model" autocomplete="off" name="model" required>
+                    <option value="">Select Mag Model</option>
                     <option value="MAG250">MAG250</option>
                     <option value="MAG254">MAG254</option>
                     <option value="MAG270">MAG270</option>
@@ -175,8 +180,8 @@ if (!isset($_SESSION['username'])) {
                 <button onclick="viewProfile()">View Profile</button>
             </div>
             <div class="iframe-wrapper">
-                <iframe id="resultIframe" src="" width="100%" height="590px"></iframe>
-                <iframe id="m3uIframe" src="" width="100%" height="30px"></iframe>
+                <iframe id="resultIframe" src="" height="200px"></iframe>
+                <iframe id="m3uIframe" src="" height="30px"></iframe>
                 <form onsubmit="generateM3UPlaylist(event)">
                     <input type="hidden" name="m3u" value="1">
                     <input type="submit" value="Generate M3U Playlist">
