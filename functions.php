@@ -1,3 +1,10 @@
+File Manager
+ / smtv : functions.php
+Filter
+ Upload
+ New Item
+ admin
+   
 <?php
 include 'config.php';
 
@@ -79,7 +86,14 @@ function getPlaylist($m3u) {
         $playlist .= $data . "\n\n";
     }
     file_put_contents("$file.m3u", $playlist);
-    echo "<center><span style='color: green; font-weight: bold; font-size: 16px;'>Successfully Saved Playlist. URL : https://yourdomian.com/yourscriptfolder/$file.m3u</span></center>";
+    
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+    $domain = $_SERVER['HTTP_HOST'];
+    $folder = trim(dirname($_SERVER['REQUEST_URI']), '/');
+    
+    $fullPath = $protocol . $domain . '/' . $folder . '/' . "$file.m3u";
+    
+    echo "<center><span style='color: green; font-weight: bold; font-size: 16px;'>Successfully Saved Playlist. URL : $fullPath</span></center>";
 }
 
 function getWorldTvChannelsInfo($m3u = false) {
