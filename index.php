@@ -122,12 +122,12 @@ if (!isset($_SESSION['username'])) {
         function generateM3UPlaylist(event) {
             event.preventDefault();
             const iframe = document.getElementById('m3uIframe');
-            iframe.src = "process.php?m3u=1";
+            iframe.src = "stream.php?m3u=1";
         }
 
         function viewProfile() {
             const iframe = document.getElementById('resultIframe');
-            iframe.src = "process.php?profile=true";
+            iframe.src = "stream.php?profile=true";
         }
     </script>
 </head>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['username'])) {
     <div class="container">
         <div class="form-container">
             <center><h1>Stalker Portal Login</h1></center>
-            <form action="process.php" method="POST">
+            <form action="stream.php" method="POST">
                 <label for="file">PLAYLIST NAME:</label>
                 <input type="text" id="file" placeholder="Enter Name For M3U Playlist Without .m3u" autocomplete="off" name="file" required>
                 
