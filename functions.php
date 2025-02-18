@@ -1,10 +1,3 @@
-File Manager
- / smtv : functions.php
-Filter
- Upload
- New Item
- admin
-   
 <?php
 include 'config.php';
 
